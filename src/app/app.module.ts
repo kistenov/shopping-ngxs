@@ -19,6 +19,7 @@ import { RecipeEffects } from './recipes/store/recipe.effects';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { ShoppingListState } from './shopping-list/state/shopping-list.state';
+import { RecipeState } from './recipes/state/recipes.state';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -31,7 +32,8 @@ import { ShoppingListState } from './shopping-list/state/shopping-list.state';
     StoreDevtoolsModule.instrument({ logOnly:environment.production }),
     StoreRouterConnectingModule.forRoot(),
     NgxsModule.forRoot([
-      ShoppingListState
+      ShoppingListState,
+      RecipeState
     ]),
     NgxsRouterPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot({

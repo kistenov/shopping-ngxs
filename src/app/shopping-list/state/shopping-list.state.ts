@@ -1,15 +1,15 @@
 import { Ingredient } from "src/app/shared/ingredient.model";
-import { State, Action, StateContext, Selector, createSelector} from '@ngxs/store';
+import { State, Action, StateContext, Selector} from '@ngxs/store';
 import { patch, append, removeItem, updateItem } from '@ngxs/store/operators';
 import { AddIngredient, AddIngredients, DeleteIngredient, StartEdit, StoptEdit, UpdateUngredient } from "./shopping-list.actions";
 
 export interface ShoppingListStateModel {
-  ingredients: Ingredient[];
-  editedIndex: number;
+  ingredients: Ingredient[],
+  editedIndex: number
 }
 
 @State<ShoppingListStateModel>({
-  name:'shoppingList',
+  name:'shoppingListState',
   defaults: {
     ingredients: [
       new Ingredient('Apples', 5),
@@ -26,7 +26,7 @@ export class ShoppingListState {
   @Action(AddIngredient)
   AddIngredient(
     ctx :StateContext<ShoppingListStateModel>,
-    action: AddIngredient
+    action: AddIngredient,
   ){
     ctx.setState(
       patch<ShoppingListStateModel>({

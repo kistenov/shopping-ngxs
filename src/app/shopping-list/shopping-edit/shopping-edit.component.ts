@@ -5,16 +5,12 @@ import {
   ViewChild
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-// import { Store } from '@ngrx/store';
 import { Store } from '@ngxs/store';
 import { Subscription } from 'rxjs';
 
 import { Ingredient } from '../../shared/ingredient.model';
 import * as ShoppingListActions from '../store/shopping-list.actions';
-import * as fromApp from '../../store/app.reducer'
 import { ShoppingListState } from '../state/shopping-list.state';
-
-
 
 
 @Component({
@@ -33,10 +29,10 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit() {
-    this.subscription =  this.store.select(ShoppingListState.editedIndex).subscribe(editedIndex => {
-      if (editedIndex > -1) {
+    this.subscription =  this.store.select(ShoppingListState).subscribe(stateData => {
+      if (stateData.editedIndex > -1) {
         this.editMode = true;
-        this.editedItem = this.store.select(ShoppingListState.ingredients)[editedIndex];
+        this.editedItem = stateData.ingredients[stateData.editedIndex];
         this.slForm.setValue({
           name: this.editedItem.name,
           amount: this.editedItem.amount

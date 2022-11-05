@@ -1,5 +1,5 @@
 import { Ingredient } from "src/app/shared/ingredient.model";
-import { State, Action, StateContext, Selector} from '@ngxs/store';
+import { State, Action, StateContext, Selector, createSelector} from '@ngxs/store';
 import { patch, append, removeItem, updateItem } from '@ngxs/store/operators';
 import { AddIngredient, AddIngredients, DeleteIngredient, StartEdit, StoptEdit, UpdateUngredient } from "./shopping-list.actions";
 
@@ -53,16 +53,7 @@ export class ShoppingListState {
     action:UpdateUngredient
   ) {
     const state = ctx.getState();
-    // ctx.setState({
-    //   ...state,
-    //   ingredients: state.ingredients.map((item, index) => {
-    //     if(state.editedIndex  === index) {
-    //       return action.payload
-    //     } else {
-    //       return item;
-    //     }
-    //   })
-    // })
+
     ctx.setState(
       patch<ShoppingListStateModel>({
         ingredients: updateItem<Ingredient>(
@@ -111,6 +102,7 @@ export class ShoppingListState {
     return state.ingredients
   }
   
+
   @Selector()
   static editedIndex(state:ShoppingListStateModel) {
     return state.editedIndex
